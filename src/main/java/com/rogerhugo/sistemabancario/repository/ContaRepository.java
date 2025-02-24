@@ -34,8 +34,9 @@ public class ContaRepository
     {
         for(Conta conta: this.contas)
         {
-            if(conta.getNumeroConta() == numeroConta)
-                return conta;
+            if(conta != null)
+                if(conta.getNumeroConta() == numeroConta)
+                    return conta;
         }
         return null;
     }
@@ -44,8 +45,9 @@ public class ContaRepository
     {
         for(Conta conta: this.contas)
         {
-            if(conta.getCartaoDebito().getNumero() == numeroCartao)
-                return conta;
+            if(conta != null)
+                if(conta.getCartaoDebito().getNumero() == numeroCartao)
+                    return conta;
         }
         return null;
     }

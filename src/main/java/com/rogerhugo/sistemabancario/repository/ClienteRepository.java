@@ -2,6 +2,8 @@ package main.java.com.rogerhugo.sistemabancario.repository;
 
 import main.java.com.rogerhugo.sistemabancario.model.Cliente;
 
+import java.util.Arrays;
+
 public class ClienteRepository
 {
     private Cliente[] clientes;
@@ -11,6 +13,15 @@ public class ClienteRepository
     {
         this.clientes = new Cliente[capacidade];
         this.quantidade = 0;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "ClienteRepository{" +
+                "clientes=" + Arrays.toString(clientes) +
+                ", quantidade=" + quantidade +
+                '}';
     }
 
     public Cliente procurarClintePeloNumeroIdentificacao(String numeroIdentificacao)

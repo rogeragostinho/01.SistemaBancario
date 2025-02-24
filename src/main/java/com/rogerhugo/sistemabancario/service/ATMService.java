@@ -23,7 +23,7 @@ public class ATMService
 
         ATMService.setConta(conta);
 
-        System.out.println("Conta acessada");
+        System.out.println("Sessão iniciada");
     }
 
     public static void consultarSaldo()
@@ -33,7 +33,7 @@ public class ATMService
 
     public static void levantarValores(double valor)
     {
-        if(valor > ATMService.conta.getSaldo())
+        /*if(valor > ATMService.conta.getSaldo())
         {
             System.out.println("Saldo insuficiente");
             return;
@@ -41,12 +41,13 @@ public class ATMService
 
         conta.retirarValor(valor);
 
-        System.out.println("Levantamento feito");
+        System.out.println("Levantamento feito, " + valor + " kz");*/
+        BancoService.levantarValores(ATMService.conta.getNumeroConta(), ATMService.conta.getCliente().getIdentificacao().getNumero(), valor);
     }
 
     public static void fazerTransferencia(int numeroContaDestino, double valor)
     {
-        Conta contaDestino = BancoService.getRepositorioContas().getConta(numeroContaDestino);
+        /*Conta contaDestino = BancoService.getRepositorioContas().getConta(numeroContaDestino);
         if(contaDestino == null)
         {
             System.out.println("Conta de destino inexistente");
@@ -56,7 +57,8 @@ public class ATMService
         ATMService.conta.retirarValor(valor);
         contaDestino.setSaldo(valor);
 
-        System.out.println("Transferencia feita");
+        System.out.println("Transferencia feita");*/
+        BancoService.fazerTransferencia(ATMService.conta.getNumeroConta(), numeroContaDestino, valor);
     }
 
     public static void fecharSessao()

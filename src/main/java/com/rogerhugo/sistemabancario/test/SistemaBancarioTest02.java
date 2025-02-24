@@ -1,9 +1,10 @@
 package main.java.com.rogerhugo.sistemabancario.test;
 
 import main.java.com.rogerhugo.sistemabancario.model.*;
+import main.java.com.rogerhugo.sistemabancario.service.ATMService;
 import main.java.com.rogerhugo.sistemabancario.service.BancoService;
 
-public class SistemaBancarioTest01
+public class SistemaBancarioTest02
 {
     public static void main(String[] args)
     {
@@ -17,20 +18,13 @@ public class SistemaBancarioTest01
         Cliente cliente2 = new Cliente("Eren Yeager", TipoIdentificacao.BILHETE_IDENTIDADE, identificacao2, 921760220);
         BancoService.abrirContaPoupanca(cliente2, 90000);
 
-        //System.out.println(BancoService.getRepositorioContas());
-        //System.out.println(BancoService.getRepositorioClientes());
-        //System.out.println(BancoService.getRepositorioCartaoDebito());
-
         Conta conta1 = BancoService.getRepositorioContas().getConta(1);
         Conta conta2 = BancoService.getRepositorioContas().getConta(2);
 
-        //Banco.fazerTransferencia(1, 2, 15000);
-        //Banco.fazerTransferencia(2, 1, 100000);
+        ATMService.iniciarSesao(1, 1111);
 
-        //BancoService.levantarValores(1, "01LA02", 10000);
-        //BancoService.levantarValores(2, "37LA02", 75000);
-
-        BancoService.fazerDeposito(1, 150000000);
+        ATMService.levantarValores(10000);
+        ATMService.fazerTransferencia(2, 10000);
 
         System.out.println(conta1);
         System.out.println(conta2);

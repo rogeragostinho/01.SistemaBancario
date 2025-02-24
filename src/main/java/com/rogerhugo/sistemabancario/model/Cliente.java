@@ -3,7 +3,7 @@ package main.java.com.rogerhugo.sistemabancario.model;
 public class Cliente
 {
     private static int contador = 1;
-    private int numeroCliente;
+    private int numeroCliente; // melhorar geração de numero
     private String nome;
     private TipoIdentificacao tipoIdentificacao;
     private Identificacao identificacao;
@@ -24,7 +24,7 @@ public class Cliente
         return "Cliente{" +
                 "numeroCliente=" + numeroCliente +
                 ", nome='" + nome + '\'' +
-                ", tIpoIdentificacao=" + tipoIdentificacao.getDescricao() +
+                ", tipoIdentificacao=" + tipoIdentificacao.getDescricao() +
                 ", identificacao=" + identificacao +
                 ", telefone=" + telefone +
                 '}';

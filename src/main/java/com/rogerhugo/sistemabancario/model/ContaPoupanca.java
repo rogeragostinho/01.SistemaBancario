@@ -3,6 +3,9 @@ import java.util.List;
 
 public class ContaPoupanca extends Conta
 {
+    /*
+    * ainda em desuso
+    * */
     private int numeroSaquesMensaisPossiveis;
     private int numeroTransferenciasMensaisPossiveis;
     private int numeroSaquesMensaisFeitos;

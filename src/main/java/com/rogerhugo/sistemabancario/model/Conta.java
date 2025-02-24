@@ -2,9 +2,9 @@ package main.java.com.rogerhugo.sistemabancario.model;
 
 public abstract class Conta
 {
-    private int numeroConta; // automatico
+    private int numeroConta; // automatico, melhorar
     private Cliente cliente;
-    private String dataCriacao; // automatico
+    private String dataCriacao; // automatico, melhorar, implementar Date
     private double saldo;
     private CartaoDebito cartaoDebito;
 
@@ -18,8 +18,10 @@ public abstract class Conta
     @Override
     public String toString()
     {
+        String tipo = this instanceof ContaCorrente ? "corrente" : "poupanca";
         return "Conta{" +
-                "numeroConta=" + numeroConta +
+                "tipo=" + tipo +
+                ", numeroConta=" + numeroConta +
                 ", cliente=" + cliente +
                 ", dataCriacao='" + dataCriacao + '\'' +
                 ", saldo=" + saldo +
@@ -27,6 +29,7 @@ public abstract class Conta
                 '}';
     }
 
+    // melhorar
     public boolean retirarValor(double valor)
     {
         if(valor > this.saldo || valor == 0) return false;
@@ -35,6 +38,7 @@ public abstract class Conta
         return true;
     }
 
+    // melhorar
     public boolean depositarValor(double valor)
     {
         if(valor <= 0) return false;

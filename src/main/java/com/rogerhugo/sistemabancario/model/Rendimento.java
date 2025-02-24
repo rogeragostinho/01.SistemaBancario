@@ -1,5 +1,6 @@
 package main.java.com.rogerhugo.sistemabancario.model;
 
+// ainda em desuso
 public class Rendimento
 {
     private String mes;

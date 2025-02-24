@@ -2,11 +2,11 @@ package main.java.com.rogerhugo.sistemabancario.model;
 
 public abstract class Cartao
 {
-    private int numero;
+    private int numero; // melhorar geração de numero
     private Conta conta;
-    private int pin;
-    private String dataEmissao;
-    private String dataValidade;
+    private int pin; // melhorar sistema de pin
+    private String dataEmissao; // implementar Date
+    private String dataValidade; // implementar Date
 
     public Cartao(int numero, String dataEmissao)
     {

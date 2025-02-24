@@ -10,26 +10,12 @@ public class BancoService
     private static ContaRepository repositorioContas;
     private static ClienteRepository repositorioClientes;
     private static CartaoDebitoRepository repositorioCartaoDebito;
-    private int cartoesDebitoDisponiveis;
 
     static
     {
         BancoService.repositorioContas = new ContaRepository(10);
         BancoService.repositorioClientes = new ClienteRepository(10);
-        cartoesDebitoDisponiveis = new CartaoDebito[10];
-
-        for(int i = 0; i < 10; i++)
-            cartoesDebitoDisponiveis[i] = new CartaoDebito(i+1, "23/02/2025");
-    }
-
-    public static void imprimeCartoesDebito()
-    {
-        for(CartaoDebito cartao: BancoService.cartoesDebitoDisponiveis)
-        {
-            System.out.printf("Numero cartao: %d\n", cartao.getNumero());
-            //System.out.printf("Pin: %d\n", cartao.getPin());
-            System.out.println("-------------------");
-        }
+        BancoService.repositorioCartaoDebito = new CartaoDebitoRepository(10);
     }
 
     public static void abrirContaCorrente(Cliente cliente, double valor)
@@ -45,7 +31,7 @@ public class BancoService
             BancoService.repositorioClientes.addCliente(cliente);
 
         // criar a logica do cartao
-        Conta conta = new ContaCorrente(repositorioContas.getNextNumeroConta(), cliente, cartoesDebitoDisponiveis[0]);
+        Conta conta = new ContaCorrente(repositorioContas.getNextNumeroConta(), cliente, BancoService.repositorioCartaoDebito.pegarCartao());
         conta.setSaldo(valor);
         repositorioContas.addConta(conta);
         System.out.println("Conta criada com sucesso");
@@ -63,7 +49,7 @@ public class BancoService
         if(BancoService.repositorioClientes.procurarClintePeloNumeroIdentificacao(cliente.getIdentificacao().getNumero()) == null)
             BancoService.repositorioClientes.addCliente(cliente);
 
-        Conta conta = new ContaPoupanca(repositorioContas.getNextNumeroConta(), cliente, cartoesDebitoDisponiveis[1]);
+        Conta conta = new ContaPoupanca(repositorioContas.getNextNumeroConta(), cliente, BancoService.repositorioCartaoDebito.pegarCartao());
         conta.setSaldo(valor);
         repositorioContas.addConta(conta);
         System.out.println("Conta criada com sucesso");
@@ -134,12 +120,20 @@ public class BancoService
             return;
         }
 
-        if(conta.retirarValor(valor))
+        // verificando identidade
+        if (!(conta.getCliente().getIdentificacao().getNumero().equals(numeroIdentificacao)))
+        {
+            System.out.println("Permissão não concedida para esta operação");
+            return;
+        }
+
+        if (conta.retirarValor(valor))
             System.out.println("Levantamento feito, retirado " + valor + " kz");
     }
 
-    public static ContaRepository getRepositorioContas()
-    {
-        return repositorioContas;
-    }
+    public static ContaRepository getRepositorioContas() { return BancoService.repositorioContas; }
+
+    public static ClienteRepository getRepositorioClientes() { return BancoService.repositorioClientes; }
+
+    public static CartaoDebitoRepository getRepositorioCartaoDebito() { return BancoService.repositorioCartaoDebito; }
 }
